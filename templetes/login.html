@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    {% load static %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin: auto;
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background-color: #f9f9f9;
+        }
+        form{
+            border: 1px solid #ff813e;
+            padding:20px;
+        }
+        img {
+            max-width: 100px; /* Adjust the size as needed */
+            height: auto;
+            display: block;
+            margin: 0 auto 20px;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        h1{
+            color: #ff813e;
+            border-bottom: 1px solid #ff813e;
+            padding:5px;
+            margin-bottom: 20px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            background-color: #ff813e;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #ff813e;
+        }
+        .innercontainer {
+            text-align: center;
+        }
+        a{
+            display: block; 
+            text-align: center; 
+            margin-top: 10px;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 10px;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            z-index: 9999;
+        }
+        /* Media query for mobile devices */
+        @media only screen and (max-width: 600px) {
+            .container {
+                max-width: 100%;
+                padding: 40px;
+            }
+            input[type="text"], input[type="password"], button, label {
+                padding: 5px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<script>
+    function togglePassword() {
+        var passwordField = document.getElementById("password");
+        var passwordToggle = document.querySelector(".password-toggle");
+
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            passwordToggle.textContent = "Hide";
+        } else {
+            passwordField.type = "password";
+            passwordToggle.textContent = "Show";
+        }
+    }
+</script>
+<body>
+    <div class="container">
+        <img src="{% static 'currylogo.jpg' %}" alt="Curry Point Logo">
+        <form method="post">
+            <h1>Login</h1>
+            {% csrf_token %}
+            <label for="phnumber">Phone Number:</label>
+            <input type="text" id="phnumber" placeholder="Phone Number" name="phnumber" required>
+            <label for="password">Password:</label>
+            <div class="password-container">
+                <input type="password" id="password" placeholder="Password" name="password" required>
+                <span class="password-toggle" onclick="togglePassword()">Show</span>
+            </div>
+            
+            <button type="submit">Login</button>
+            {% if show_popup %}
+            <div class="popup">
+                <p>Login failed. Please check your phone number and password.</p>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    document.querySelector('.popup').style.display = 'block';
+                    setTimeout(function() {
+                        document.querySelector('.popup').style.display = 'none';
+                    }, 3000); // Hide the popup after 3 seconds
+                });
+            </script>
+            {% endif %}
+            <a href="{% url 'forgot' %}">Forgot Password?</a>
+            <div class="innercontainer">
+                <p>If you don't have an account? <a href="{% url 'signup' %}">Signup</a></p>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

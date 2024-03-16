@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+    {% load static %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            justify-content: space-around; /* Space items evenly */
+            margin: auto;
+            max-width: 800px;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background-color: #f9f9f9;
+            flex-wrap: wrap; /* Allow items to wrap to the next line */
+            border: 1px solid #ff813e;
+        }
+        .item {
+            text-align: center;
+            flex-basis: 30%; /* Set the initial width of each item */
+        }
+        img {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        .Details{
+            color: #ff813e;
+        }
+        @media only screen and (max-width: 600px) {
+            .container {
+                flex-direction: column; /* Stack items vertically on small screens */
+                align-items: center; /* Center items horizontally */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+       <div class="item">
+           <p>Name:</p><p class="Details">{{student.name}}</p>
+       </div>
+       <div class="item">
+           <p>Email:</p><p class="Details">{{student.email}}</p>
+       </div>
+       <div class="item">
+           <p>College:</p><p class="Details">{{student.college}}</p>
+       </div>
+       <div class="item">
+           <p>Phone Number:</p><p class="Details">{{student.phnumber}}</p>
+       </div>
+       <div class="item">
+           <p>Alternate Phone Number:</p><p class="Details">{{student.altphnumber}}</p>
+       </div>
+    </div>
+    <div class="container">
+        <div class="item">
+            <div class="image-container">
+                <img src="{%static 'currylogo.jpg'%}" alt="currylogo">
+                <a href="{% url 'due' %}"><p>Khata Details</p></a>
+            </div>
+        </div>
+        <div class="item">
+            <div class="image-container">
+                <img src="{%static 'currylogo.jpg'%}" alt="currylogo">
+                <a href="{% url 'add' %}"><p>Enter</p></a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

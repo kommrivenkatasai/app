@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <style>
+         .container {
+            margin: auto;
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background-color: #f9f9f9;
+        }
+        form{
+            border: 1px solid #ff813e;
+            padding:20px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        h1{
+            color: #ff813e;
+            border-bottom: 1px solid #ff813e;
+            padding:5px;
+            margin-bottom: 20px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            background-color: #ff813e;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        img {
+            max-width: 100px; /* Adjust the size as needed */
+            height: auto;
+            display: block;
+            margin: 0 auto 20px;
+        }
+        @media only screen and (max-width: 600px) {
+            .container {
+                max-width: 100%;
+                padding: 40px;
+            }
+            input, button, label {
+                padding: 5px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="{% static 'currylogo.jpg' %}" alt="Curry Point Logo">
+        <form  method="post">
+            {% csrf_token %}
+            <label for="datetime">Date and Time</label>
+            <input type="datetime-local" id="datetime" name="datetime" required>
+            <label for="amount">Amount</label>
+            <input type="number" id="amount" placeholder="Amount" name="amount" required>
+            <label for="timeofday">Time of Day</label>
+            <select name="timeofday" id="timeofday" name="timeofday" required>
+                <option value="morning">Morning</option>
+                <option value="night">Night</option>
+            </select>
+            <button type="submit">Add</button>
+        </form>  
+    </div>
+</body>
+</html>

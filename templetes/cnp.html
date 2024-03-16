@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Password</title>
+    {% load static %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin: auto;
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background-color: #f9f9f9;
+        }
+        form{
+            border: 1px solid #ff813e;
+            padding:20px;
+        }
+        img {
+            max-width: 100px; /* Adjust the size as needed */
+            height: auto;
+            display: block;
+            margin: 0 auto 20px;
+        }
+        input[type="password"],input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        h1{
+            color: #ff813e;
+            border-bottom: 1px solid #ff813e;
+            padding:5px;
+            margin-bottom: 20px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            background-color: #ff813e;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #ff813e;
+        }
+        /* Media query for mobile devices */
+        @media only screen and (max-width: 600px) {
+            .container {
+                max-width: 100%;
+                padding: 40px;
+            }
+            input[type="password"],input[type="text"], button, label {
+                padding: 5px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<script>
+    function checkPasswordMatch() {
+    var password = document.getElementById("password").value;
+    var confirmPassword = document.getElementById("copassword").value;
+
+    if (password !== confirmPassword) {
+        document.getElementById("message").innerHTML = "Passwords do not match";
+    } else {
+        document.getElementById("message").innerHTML = "";
+    }
+}
+
+    function togglePassword() {
+        var passwordField = document.getElementById("password");
+        var copasswordField = document.getElementById("copassword");
+        var passwordToggle = document.querySelector(".password-toggle");
+        var copasswordToggle = document.querySelector(".copassword-toggle");
+
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            copasswordField.type = "text";
+            passwordToggle.textContent = "Hide";
+            copasswordToggle.textContent = "Hide";
+        } else {
+            passwordField.type = "password";
+            copasswordField.type = "password";
+            passwordToggle.textContent = "Show";
+            copasswordToggle.textContent = "Show";
+        }
+    }
+</script>
+<body>
+    <div class="container">
+        <img src="{% static 'currylogo.jpg' %}" alt="Curry Point Logo">
+        <form method="post">
+            <h1>Change Password</h1>
+            {% csrf_token %}
+            <span class="password-toggle" onclick="togglePassword()">Show</span>
+            <label for="password">Password:</label>
+            <input type="password" id="password" placeholder="Password" name="password" minlength="8" maxlength="16" required>
+            <span class="copassword-toggle" onclick="togglePassword()">Show</span>
+            <label for="copassword">Confirm Password:</label>
+            <input type="password" id="copassword" placeholder="Confirm Password" name="copassword" required onkeyup="checkPasswordMatch()">
+            <p id="message"></p>
+            <button type="submit">Change</button>
+        </form>
+    </div>
+</body>
+</html>

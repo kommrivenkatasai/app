@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>Email</td>
+            <td>phnumber</td>
+            <td>altphnumber</td>
+            <td>college</td>
+            <td>passsword</td>
+        </tr>
+        {%for student in students %}
+        <tr>
+            <td>{{student.name}}</td>
+            <td>{{student.email}}</td>
+            <td>{{student.phnumber}}</td>
+            <td>{{student.altphnumber}}</td>
+            <td>{{student.college}}</td>
+            <td>{{student.password}}</td>
+        </tr>
+        {%endfor%}
+    </table>
+</body>
+</html>
